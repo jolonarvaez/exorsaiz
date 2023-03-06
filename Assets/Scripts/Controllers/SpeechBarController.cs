@@ -9,7 +9,7 @@ public class SpeechBarController : MonoBehaviour
     public TextMeshProUGUI personNameText;
 
     private int sentenceIndex = -1;
-    public StoryScene currentScene;
+    private StoryScene currentScene;
     private State state = State.COMPLETED;
 
     private enum State
@@ -26,20 +26,21 @@ public class SpeechBarController : MonoBehaviour
 
     public void PlayNextSentence()
     {
-
+        StartCoroutine(TypeText(currentScene.sentences[++sentenceIndex].text));
+        personNameText.text = currentScene.sentences[sentenceIndex].speaker.speakerName;
     }
 
-    public bool isCompleted()
+    public bool IsCompleted()
     {
         return state == State.COMPLETED;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public bool IsLastSentence()
     {
-        StartCoroutine(TypeText(currentScene.sentences[++sentenceIndex].text));
-        personNameText.text = currentScene.sentences[sentenceIndex].speaker.speakerName;
+        return sentenceIndex + 1 == currentScene.sentences.Count;
     }
+
+
     private IEnumerator TypeText(string text)
     {
         barText.text = "";
@@ -49,7 +50,7 @@ public class SpeechBarController : MonoBehaviour
         while(state != State.COMPLETED)
         {
             barText.text += text[wordIndex];
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
             if(++wordIndex == text.Length)
             {
                 state = State.COMPLETED;
