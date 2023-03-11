@@ -6,23 +6,22 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
-    public int selectedLevel;
-    public int exerciseTimer;
-    public int restTimer;
-    public int setNo;
-    public string[] exerciseList;
+    private int selectedLevel;
+    private int exerciseTimer;
+    private int restTimer;
+    private int setNo;
+    private string[] exerciseList;
 
     public TMP_Text exerciseLabel;
     public TMP_Text currentLevel;
 
     void Start()
     {
-        int selectedLevel = LevelSelectDisplay.selectedLevel;
-        int exerciseTimer = LevelSelectDisplay.exerciseTimer;
-        int restTimer = LevelSelectDisplay.restTimer;
-        int setNo = LevelSelectDisplay.setNo;
-        string[] exerciseList = LevelSelectDisplay.exerciseList;
-
+        selectedLevel = LevelSelectDisplay.selectedLevel;
+        exerciseTimer = LevelSelectDisplay.exerciseTimer;
+        restTimer = LevelSelectDisplay.restTimer;
+        setNo = LevelSelectDisplay.setNo;
+        exerciseList = LevelSelectDisplay.exerciseList;
        
         exerciseLabel.text = exerciseList[0];
         currentLevel.text = "Level " + selectedLevel;
