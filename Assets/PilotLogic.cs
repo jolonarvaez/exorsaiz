@@ -5,15 +5,37 @@ using UnityEngine.UI;
 using TMPro;
 public class PilotLogic : MonoBehaviour
 {
-    public TextMeshProUGUI ExerciseLabel;
     public Image SyncBar;
     public Image SideBarL;
     public Image SideBarR;
     public int SyncPercentage;
-    public string ExerciseName = "Static Lunge";
+    
+
+    private int selectedLevel;
+    private int exerciseTimer;
+    private int restTimer;
+    private int setNo;
+    private int currentExercise;
+    private string[] exerciseList;
+    private int exerciseLength;
+
+    public TMP_Text exerciseLabel;
+    public TMP_Text currentLevel;
+
     // Start is called before the first frame update
     void Start()
     {
+        selectedLevel = LevelSelectDisplay.selectedLevel;
+        exerciseTimer = LevelSelectDisplay.exerciseTimer;
+        restTimer = LevelSelectDisplay.restTimer;
+        setNo = LevelSelectDisplay.setNo;
+        exerciseList = LevelSelectDisplay.exerciseList;
+        currentLevel.text = "Level " + selectedLevel;
+
+        exerciseLength = exerciseList.Length;
+        currentExercise = 0;
+
+        StartCoroutine(ExerciseCoroutine());
         
     }
 
@@ -25,6 +47,16 @@ public class PilotLogic : MonoBehaviour
         setBar();
     }
 
+    IEnumerator ExerciseCoroutine()
+    {
+        while(currentExercise < exerciseLength)
+        {
+            yield return new WaitForSeconds(2f);
+            currentExercise++;
+            Debug.Log(exerciseList[currentExercise]);
+        }
+    }
+
     public void getSyncBar()
     {
         SyncBar.fillAmount = (float)SyncPercentage / 100;
@@ -32,12 +64,13 @@ public class PilotLogic : MonoBehaviour
 
     public void setLabel()
     {
-        ExerciseName = "Easy Side Planks - Left";
+
+        exerciseLabel.text = exerciseList[currentExercise];
     }
 
     public void getLabel()
     {
-        ExerciseLabel.text = ExerciseName;
+        exerciseLabel.text = exerciseList[currentExercise];
     }
 
     public void setBar()
