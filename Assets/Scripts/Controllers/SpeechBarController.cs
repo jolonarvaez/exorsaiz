@@ -12,7 +12,7 @@ public class SpeechBarController : MonoBehaviour
     private StoryScene currentScene;
     private State state = State.COMPLETED;
 
-    public Dictionary<Speaker, SpriteController> sprites;
+    private Dictionary<Speaker, SpriteController> sprites;
     public GameObject spritesPrefab;
 
     private enum State
@@ -20,7 +20,7 @@ public class SpeechBarController : MonoBehaviour
         PLAYING, COMPLETED
     }
 
-    private void Start()
+    private void Awake()
     {
         sprites = new Dictionary<Speaker, SpriteController>();
     }
