@@ -50,6 +50,8 @@ public class PilotLogic : MonoBehaviour
         CurrentLevel.text = "Level " + selectedLevel;
         SetLabel.text = "Set " + (currSet + 1) + " / " + setNo;
         exerciseLength = exerciseList.Length;
+
+        SceneManager.LoadScene("PostBattle");
     }
 
     void Update()
