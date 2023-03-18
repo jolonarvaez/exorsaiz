@@ -22,6 +22,7 @@ public class PostBattleManager : MonoBehaviour
     private string[] exerciseList;
     private int[] percentageList = new int[11] {60, 70, 100, 50, 50, 60, 80, 70, 100, 100, 100 };
     private int total_stars = 0;
+    private Report report;
     // Start is called before the first frame update
     void Start()
     {
