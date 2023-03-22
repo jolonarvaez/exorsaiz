@@ -13,6 +13,7 @@ public class LevelSelectDisplay : MonoBehaviour
     public static int restTimer;
     public static int setNo;
     public static string[] exerciseList;
+    public EnergyBarOverlay energyBarOverlay;
 
     public Level level;
     public TMP_Text levelNo;
@@ -73,6 +74,13 @@ public class LevelSelectDisplay : MonoBehaviour
 
     public void OpenScene()
     {
+        Debug.LogWarning("level.energyCost" + level.energyCost);
+        bool isEnergyDeducted = energyBarOverlay.DecreaseEnergy(level.energyCost);
+        if(!isEnergyDeducted)
+        {
+            return;
+        }
+
         selectedLevel = level.levelNumber;
         exerciseTimer = level.exerciseTimer;
         restTimer = level.restTimer;
